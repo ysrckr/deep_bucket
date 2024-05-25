@@ -1,10 +1,9 @@
-import { apiPostfix } from './src/lib/constants';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
 // https://vitejs.dev/config/
 
-const replacePathRegex = new RegExp(`^/${apiPostfix}`);
+const replacePathRegex = new RegExp(`^/api`);
 
 export default defineConfig({
   plugins: [react()],
@@ -16,7 +15,7 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      [`/${apiPostfix}`]: {
+      '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: path => path.replace(replacePathRegex, ''),
