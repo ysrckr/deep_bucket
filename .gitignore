@@ -151,3 +151,8 @@ go.work.sum
 .env
 .env.production
 server/tmp/main
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
