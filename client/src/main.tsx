@@ -1,12 +1,15 @@
 import './main.css';
 import './globals.css';
 
-import App from './App.tsx';
+import { Login } from './pages/login';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <div>
+      <h1>Hello, world!</h1>
+      <Login />
+    </div>{' '}
   </React.StrictMode>,
 );
