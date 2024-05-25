@@ -1,11 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const api = 'api';
-const version = import.meta.env.VITE_API_VERSION || 'v1';
-const baseURL = `/${api}/${version}`;
+import { apiBaseURL } from './constants';
 
 const request = axios.create({
-  baseURL,
+  baseURL: apiBaseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
