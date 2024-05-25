@@ -1,6 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-export const request = axios.create({
+const api = 'api';
+const version = import.meta.env.VITE_API_VERSION || 'v1';
+const baseURL = `/${api}/${version}`;
+
+const request = axios.create({
+  baseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
