@@ -6,8 +6,14 @@ import { cn } from './lib/utils';
 function App() {
   return (
     <>
-      <div className={cn('bg-red-500', 'text-white', 'p-4')}>
-        <Button variant="default" size="sm">
+      <div className={cn('bg-red-500', 'p-4')}>
+        <Button
+          variant="default"
+          size="sm"
+          onClick={() => {
+            console.log('Hello World');
+          }}
+        >
           Hello World
         </Button>
       </div>
