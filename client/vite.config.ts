@@ -5,7 +5,6 @@ import react from '@vitejs/plugin-react-swc';
 const apiBaseURL = process.env.VITE_API_BASE_URL || 'http://localhost:8000';
 const apiPostfix = process.env.VITE_API_POSTFIX || 'api';
 const apiVersion = process.env.VITE_API_VERSION || 'v1';
-const replacePathRegex = new RegExp(`^${apiPostfix}/`);
 
 export default defineConfig({
   plugins: [react()],
@@ -16,11 +15,12 @@ export default defineConfig({
     },
   },
   server: {
+    port: 3000,
     proxy: {
       [`/${apiPostfix}`]: {
-        target: `${apiBaseURL}/${apiVersion}/`,
+        target: `${apiBaseURL}/${apiVersion}`,
         changeOrigin: true,
-        rewrite: path => path.replace(replacePathRegex, ''),
+        rewrite: path => path.replace(`/${apiPostfix}`, ''),
       },
     },
   },
