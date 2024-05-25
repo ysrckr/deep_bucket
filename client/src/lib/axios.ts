@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 export const request = axios.create({
   withCredentials: true,
@@ -27,3 +27,21 @@ request.interceptors.request.use(
     return Promise.reject(error);
   },
 );
+
+export const get = (url: string, config?: AxiosRequestConfig) =>
+  request.get(url, config);
+
+export const post = (
+  url: string,
+  data?: unknown,
+  config?: AxiosRequestConfig,
+) => request.post(url, data, config);
+
+export const update = (
+  url: string,
+  data?: unknown,
+  config?: AxiosRequestConfig,
+) => request.patch(url, data, config);
+
+export const del = (url: string, config?: AxiosRequestConfig) =>
+  request.delete(url, config);
