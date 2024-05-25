@@ -1,5 +1,5 @@
 import './main.css';
-import '../app/globals.css';
+import './globals.css';
 
 import App from './App.tsx';
 import React from 'react';

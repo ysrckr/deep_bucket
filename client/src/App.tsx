@@ -1,9 +1,13 @@
 import './App.css';
 
+import { Button } from './components/ui/Button';
+
 function App() {
   return (
     <>
-      <div></div>
+      <div>
+        <Button>Primary</Button>
+      </div>
     </>
   );
 }
