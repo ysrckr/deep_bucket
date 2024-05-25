@@ -1,2 +1,2 @@
-# deep_bucket
+# Deep Bucket
 Image and Video Bucket
