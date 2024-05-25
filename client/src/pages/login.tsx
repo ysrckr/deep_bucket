@@ -8,7 +8,7 @@ export const Login = () => {
     <div>
       <Button
         onClick={async () => {
-          const res = await get('hello/tes');
+          const res = await get('hello/test');
           const message = res?.data?.message;
           setMessage(message);
         }}
