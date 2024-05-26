@@ -5,5 +5,7 @@ export const Route = createLazyFileRoute('/_public/signup')({
 });
 
 function Signup() {
-  return <div>Hello /_public/signup!</div>;
+  return <section>
+    <form action=""></form>
+  </section>;
 }
