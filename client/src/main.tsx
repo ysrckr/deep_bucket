@@ -1,15 +1,11 @@
 import './main.css';
 import './globals.css';
 
-import { Login } from './pages/login';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <div>
-      <h1>Hello, world!</h1>
-      <Login />
-    </div>{' '}
-  </React.StrictMode>,
+  <StrictMode>
+    <div>hello</div>{' '}
+  </StrictMode>,
 );
