@@ -1,3 +1,4 @@
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
@@ -7,7 +8,7 @@ const apiPostfix = process.env.VITE_API_POSTFIX || 'api';
 const apiVersion = process.env.VITE_API_VERSION || 'v1';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), TanStackRouterVite()],
   root: '.',
   resolve: {
     alias: {
