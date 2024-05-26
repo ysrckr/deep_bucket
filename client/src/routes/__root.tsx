@@ -1,21 +1,15 @@
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 
+import { Header } from '@/components/header';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { cn } from '@/lib/utils';
 
 export const Route = createRootRoute({
   component: () => (
-    <main>
-      <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
-      </div>
-      <hr />
+    <div className={cn('my-0, mx-auto w-full')}>
+      <Header isAuthenticated={false} />
       <Outlet />
       <TanStackRouterDevtools />
-    </main>
+    </div>
   ),
 });
