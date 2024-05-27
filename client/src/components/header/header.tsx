@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from '@tanstack/react-router';
 
 type HeaderProps = {
   isAuthenticated: boolean;
@@ -13,7 +14,9 @@ export const Header: FC<HeaderProps> = ({ isAuthenticated }) => {
       ) : (
         <>
           <button>Sign In</button>
-          <button>Sign Up</button>
+          <button>
+            <Link to="/signup">Sign Up</Link>
+          </button>
         </>
       )}
     </header>

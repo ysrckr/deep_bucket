@@ -10,7 +10,7 @@ export const FieldInfo: FC<FieldInfoProps> = ({ field }) => {
   return (
     <>
       {field.state.meta.touchedErrors ? (
-        <em>{field.state.meta.touchedErrors}</em>
+        <em className="text-red-500">{field.state.meta.touchedErrors}*</em>
       ) : null}
       {field.state.meta.isValidating ? 'Validating...' : null}
     </>
