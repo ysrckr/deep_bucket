@@ -5,7 +5,7 @@ import { Main } from '@/components/main/main';
 export const Route = createFileRoute('/_public')({
   component: () => (
     <Main>
-      Hello /_public! <Outlet />
+      <Outlet />
     </Main>
   ),
 });
