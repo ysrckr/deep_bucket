@@ -1,4 +1,6 @@
+import { Button } from '@/components/ui/Button';
 import { FieldInfo } from '@/components/form/fieldInfo';
+import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
@@ -10,6 +12,7 @@ export const Route = createLazyFileRoute('/_public/signup')({
 });
 
 export interface SignUpForm {
+  username: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -20,6 +23,7 @@ export interface SignUpForm {
 function Signup() {
   const { Field, handleSubmit } = useForm<SignUpForm, typeof zodValidator>({
     defaultValues: {
+      username: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -40,9 +44,35 @@ function Signup() {
           e.stopPropagation();
           handleSubmit();
         }}
-        className={cn('flex flex-col gap-4 p-4')}
+        className={cn(
+          'flex flex-col gap-4 w-full max-w-3xl bg-white rounded-lg shadow-lg p-4 lg:max-w-6xl lg:p-8',
+        )}
       >
-        <div>
+        <div className={cn('grid gap-4 grid-cols-1 w-full lg:grid-cols-2')}>
+          <Field
+            name="username"
+            validators={{
+              onChange: z.string().min(3, {
+                message: 'Username must be at least 3 characters',
+              }),
+            }}
+            children={field => (
+              <div className={cn('flex flex-col gap-2')}>
+                <Input
+                  type="text"
+                  label="Username"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={e => field.handleChange(e.target.value)}
+                  isRequired
+                />
+                <FieldInfo field={field} />
+              </div>
+            )}
+          />
+
           <Field
             name="firstName"
             validators={{
@@ -52,115 +82,134 @@ function Signup() {
             }}
             children={field => (
               <div className={cn('flex flex-col gap-2')}>
-                <label htmlFor={field.name}>
-                  First Name<span className="text-red-500">*</span>:
-                </label>
-                <input
+                <Input
+                  type="text"
+                  label="First Name"
                   id={field.name}
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={e => field.handleChange(e.target.value)}
-                  className={cn('')}
+                  isRequired
                 />
                 <FieldInfo field={field} />
               </div>
             )}
           />
 
-          <div>
-            <Field
-              name="email"
-              validators={{
-                onChange: z.string().email({
-                  message: 'Invalid email address',
+          <Field
+            name="lastName"
+            validators={{
+              onChange: z.string().min(1, {
+                message: 'Last name is required',
+              }),
+            }}
+            children={field => (
+              <div className={cn('flex flex-col gap-2')}>
+                <Input
+                  type="text"
+                  label="Last Name"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={e => field.handleChange(e.target.value)}
+                  isRequired
+                />
+                <FieldInfo field={field} />
+              </div>
+            )}
+          />
+
+          <Field
+            name="email"
+            validators={{
+              onChange: z.string().email({
+                message: 'Invalid email address',
+              }),
+            }}
+            children={field => (
+              <div className={cn('flex flex-col gap-2')}>
+                <Input
+                  type="email"
+                  label="Email"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={e => field.handleChange(e.target.value)}
+                  isRequired
+                />
+                <FieldInfo field={field} />
+              </div>
+            )}
+          />
+
+          <Field
+            name="password"
+            validators={{
+              onChange: z
+                .string()
+                .min(8, {
+                  message: 'Password must be at least 8 characters',
+                })
+                .max(100, {
+                  message: 'Password must be at most 100 characters',
+                })
+                .refine(value => {
+                  return /[A-Z]/.test(value) &&
+                    /[a-z]/.test(value) &&
+                    /\d/.test(value) &&
+                    /\W/.test(value)
+                    ? true
+                    : 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
                 }),
-              }}
-              children={field => (
-                <>
-                  <label htmlFor={field.name}>
-                    Email<span className="text-red-500">*</span>:
-                  </label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={e => field.handleChange(e.target.value)}
-                  />
-                  <FieldInfo field={field} />
-                </>
-              )}
-            />
-          </div>
-          <div>
-            <Field
-              name="password"
-              validators={{
-                onChange: z
-                  .string()
-                  .min(8, {
-                    message: 'Password must be at least 8 characters',
-                  })
-                  .max(100, {
-                    message: 'Password must be at most 100 characters',
-                  })
-                  .refine(value => {
-                    return /[A-Z]/.test(value) &&
-                      /[a-z]/.test(value) &&
-                      /\d/.test(value) &&
-                      /\W/.test(value)
-                      ? true
-                      : 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
-                  }),
-              }}
-              children={field => (
-                <>
-                  <label htmlFor={field.name}>
-                    Password<span className="text-red-500">*</span>:
-                  </label>
-                  <input
-                    id={field.name}
-                    type="password"
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={e => field.handleChange(e.target.value)}
-                  />
-                  <FieldInfo field={field} />
-                </>
-              )}
-            />
-            <Field
-              name="confirmPassword"
-              validators={{
-                onChangeListenTo: ['password'],
-                onChange: ({ value, fieldApi }) => {
-                  if (value !== fieldApi.form.getFieldValue('password')) {
-                    return 'Passwords do not match';
-                  }
-                },
-              }}
-              children={field => (
-                <>
-                  <label htmlFor={field.name}>
-                    Confirm Password<span className="text-red-500">*</span>:
-                  </label>
-                  <input
-                    id={field.name}
-                    type="password"
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={e => field.handleChange(e.target.value)}
-                  />
-                  <FieldInfo field={field} />
-                </>
-              )}
-            />
-          </div>
+            }}
+            children={field => (
+              <div className={cn('flex flex-col gap-2')}>
+                <Input
+                  type="password"
+                  label="Password"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={e => field.handleChange(e.target.value)}
+                  isRequired
+                />
+                <FieldInfo field={field} />
+              </div>
+            )}
+          />
+          <Field
+            name="confirmPassword"
+            validators={{
+              onChangeListenTo: ['password'],
+              onChange: ({ value, fieldApi }) => {
+                if (value !== fieldApi.form.getFieldValue('password')) {
+                  return 'Passwords do not match';
+                }
+              },
+            }}
+            children={field => (
+              <div className={cn('flex flex-col gap-2')}>
+                <Input
+                  type="password"
+                  label="Confirm Password"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={e => field.handleChange(e.target.value)}
+                  isRequired
+                />
+                <FieldInfo field={field} />
+              </div>
+            )}
+          />
         </div>
-        <button type="submit">Submit</button>
+
+        <Button type="submit">Submit</Button>
       </form>
     </section>
   );

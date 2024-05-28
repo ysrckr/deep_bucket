@@ -7,5 +7,5 @@ type MainProps = {
 };
 
 export const Main: FC<MainProps> = ({ children }) => {
-  return <main className={cn('max-w-7xl my-0 mx-auto')}>{children}</main>;
+  return <main className={cn('container my-0 mx-auto')}>{children}</main>;
 };
