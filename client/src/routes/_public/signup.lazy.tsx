@@ -8,8 +8,16 @@ export const Route = createLazyFileRoute('/_public/signup')({
   component: Signup,
 });
 
+export interface SignUpForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 function Signup() {
-  const form = useForm({
+  const { Field, handleSubmit } = useForm<SignUpForm, typeof zodValidator>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -19,7 +27,6 @@ function Signup() {
     },
     validatorAdapter: zodValidator,
     onSubmit: async ({ value }) => {
-      // Do something with form data
       console.log(value);
     },
   });
@@ -30,11 +37,11 @@ function Signup() {
         onSubmit={e => {
           e.preventDefault();
           e.stopPropagation();
-          form.handleSubmit();
+          handleSubmit();
         }}
       >
         <div>
-          <form.Field
+          <Field
             name="firstName"
             validators={{
               onChange: z.string().min(1, {
@@ -57,33 +64,9 @@ function Signup() {
               </>
             )}
           />
+
           <div>
-            <form.Field
-              name="lastName"
-              validators={{
-                onChange: z.string().min(1, {
-                  message: 'Last name is required',
-                }),
-              }}
-              children={field => (
-                <>
-                  <label htmlFor={field.name}>
-                    Last Name<span className="text-red-500">*</span>:
-                  </label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={e => field.handleChange(e.target.value)}
-                  />
-                  <FieldInfo field={field} />
-                </>
-              )}
-            />
-          </div>
-          <div>
-            <form.Field
+            <Field
               name="email"
               validators={{
                 onChange: z.string().email({
@@ -108,7 +91,7 @@ function Signup() {
             />
           </div>
           <div>
-            <form.Field
+            <Field
               name="password"
               validators={{
                 onChange: z
@@ -145,7 +128,7 @@ function Signup() {
                 </>
               )}
             />
-            <form.Field
+            <Field
               name="confirmPassword"
               validators={{
                 onChangeListenTo: ['password'],
