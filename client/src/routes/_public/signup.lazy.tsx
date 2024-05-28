@@ -1,4 +1,5 @@
 import { FieldInfo } from '@/components/form/fieldInfo';
+import { cn } from '@/lib/utils';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
 import { z } from 'zod';
@@ -32,13 +33,14 @@ function Signup() {
   });
 
   return (
-    <section>
+    <section className={cn('flex justify-center items-center')}>
       <form
         onSubmit={e => {
           e.preventDefault();
           e.stopPropagation();
           handleSubmit();
         }}
+        className={cn('flex flex-col gap-4 p-4')}
       >
         <div>
           <Field
@@ -49,7 +51,7 @@ function Signup() {
               }),
             }}
             children={field => (
-              <>
+              <div className={cn('flex flex-col gap-2')}>
                 <label htmlFor={field.name}>
                   First Name<span className="text-red-500">*</span>:
                 </label>
@@ -59,9 +61,10 @@ function Signup() {
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={e => field.handleChange(e.target.value)}
+                  className={cn('')}
                 />
                 <FieldInfo field={field} />
-              </>
+              </div>
             )}
           />
 
