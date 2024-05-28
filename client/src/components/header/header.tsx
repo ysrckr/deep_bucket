@@ -12,7 +12,7 @@ export const Header: FC<HeaderProps> = ({ isAuthenticated }) => {
   return (
     <header
       className={cn(
-        'flex justify-between align-center px-8 py-8 mb-6 bg-blue-200 ',
+        'flex justify-between items-center px-8 py-8 mb-6 bg-blue-200 ',
       )}
     >
       <h1>
