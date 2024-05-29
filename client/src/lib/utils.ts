@@ -6,6 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const capitalize = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export const setPageTitle = (title: string) => {
-  document.title = titleBase + title;
+  document.title = titleBase + capitalize(title);
 };
