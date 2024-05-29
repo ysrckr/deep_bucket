@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Button';
 import { FieldInfo } from '@/components/form/fieldInfo';
 import { Input } from '@/components/ui/Input';
-import { appName } from '@/lib/constants';
+import { TitleForEntranceForm } from '@/components/TitleForEntranceForm';
 import { cn } from '@/lib/utils';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
@@ -35,15 +35,7 @@ function Signin() {
           'flex justify-center items-center flex-col gap-4 mt-8 bg-white rounded-lg shadow-lg w-full max-w-lg  p-4 lg:max-w-2xl lg:p-8',
         )}
       >
-        <img
-          src="/bucket.svg"
-          alt="logo"
-          width={80}
-          className={cn('inline-block')}
-        />
-        <h2
-          className={cn('text-lg text-center font-semibold')}
-        >{`Signin To ${appName}`}</h2>
+        <TitleForEntranceForm />
         <form
           onSubmit={e => {
             e.preventDefault();
