@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Button';
 import { FieldInfo } from '@/components/form/fieldInfo';
 import { Input } from '@/components/ui/Input';
-import { TitleForEntranceForm } from '@/components/TitleForEntranceForm';
+import { TitleForEntranceForm } from '@/components/form/TitleForEntranceForm';
 import { cn } from '@/lib/utils';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { useForm } from '@tanstack/react-form';
